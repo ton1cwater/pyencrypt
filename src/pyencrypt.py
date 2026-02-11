@@ -1,6 +1,6 @@
 from pathlib import Path
-from PyInquirer import inquirer
-from PyInquirer.validator import PathValidator
+from pyinquirer import inquirer
+from pyinquirer.validator import PathValidator
 from cryptography.fernet import Fernet
 
 version = 1.0
