@@ -1,0 +1,3 @@
+cryptography
+InquirerPy
+cffi
