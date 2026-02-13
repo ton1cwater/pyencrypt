@@ -1,8 +1,19 @@
 # pyencrypt
 Simple encryption tool written in python :)
 
+## Usage
+```pyencrypt [action] [file1] [file2]```
+
+Flags: 
+
+```-k [name of .key file (no extension)]``` generate key
+
+```-e [file to encrypt] [.key file]``` encrypt file
+
+```-d [file to decrypt] [.key file]``` decrypt file
+
 ## Install
-Make sure you have Python ```>v3.12``` and ```pipx``` installed.
+Make sure you have Python ```>=v3.11``` and ```pipx``` installed.
 Installing [pipx](https://pipx.pypa.io/stable/#install-pipx) is highly recommended.
 If you have pipx, run ```pipx install git+https://github.com/ton1cwater/pyencrypt/```
 Now you can type ```pyencrypt``` in the terminal to run.

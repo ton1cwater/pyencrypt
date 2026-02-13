@@ -1,8 +1,6 @@
 from pathlib import Path
-from InquirerPy import inquirer
-from InquirerPy.validator import PathValidator
 from cryptography.fernet import Fernet
-
+import sys
 version = 1.0
 
 HOME_PATH = str(Path.home())+"/"
@@ -20,13 +18,7 @@ def New(filename):
     print(f"key filepath: {key_file.absolute()}")
 
 def fetch_key():
-    key_path_str = inquirer.filepath(
-        message="select .key file:",
-        default=HOME_PATH,
-        validate=PathValidator(is_file=True, message="invalid filepath"),
-        only_files=True,
-    ).execute()
-
+    key_path_str = sys.argv[2]
     key_path = Path(key_path_str)
     with key_path.open("rb") as f:
         return f.read().strip()
@@ -62,41 +54,19 @@ def decrypt_file(file_path_str, key):
         print(f"\nfatal error: {e}")
 
 def main():
-    print(f"pyencrypt v{version}")
     while True:
-        choice = inquirer.rawlist(
-            message="Select an option: ",
-            choices=["Generate key", "Encrypt file", "Decrypt file", "View License", "Exit"],
-        ).execute()
+        choice = sys.argv[1]
 
-        if choice == "View License":
-            print('''\n
-    GNU GPL v3.0 or later
-''')
+        if choice == "-k":
+            New(sys.argv[2])
         
-        if choice == "Exit":
-            break
+        elif choice == "-e":
+            encrypt_file(sys.argv[2], sys.argv[3])
 
-        if choice == "Generate key":
-            name = inquirer.text(message="Enter filename for the key (no extension):").execute()
-            New(name)
-
-        elif choice in ["Encrypt file", "Decrypt file"]:
-            target_file = inquirer.filepath(
-                message=f"Select file to {choice.split()[0].lower()}:",
-                default=HOME_PATH,
-                validate=PathValidator(is_file=True, message="Must select a file"),
-                only_files=True,
-            ).execute()
-            try:
-                key = fetch_key()
-
-                if choice == "Encrypt file":
-                    encrypt_file(target_file, key)
-                else:
-                    decrypt_file(target_file, key)
-            except Exception as e:
-                print(f"\nerror loading key: {e}")
-
+        elif choice == "-d":
+            decrypt_file(sys.argv[2], sys.argv[3])
+        
+        else:
+            print(f"error at {sys.argv[0]}, no option {sys.argv[1]}")
 if __name__ == "__main__":
     main()
