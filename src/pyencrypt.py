@@ -54,19 +54,27 @@ def decrypt_file(file_path_str, key):
         print(f"\nfatal error: {e}")
 
 def main():
-    while True:
-        choice = sys.argv[1]
+    if len(sys.argv) < 2:
+        print("Not enough arguments.")
+        sys.exit()
+    choice = sys.argv[1]
 
-        if choice == "-k":
-            New(sys.argv[2])
-        
-        elif choice == "-e":
-            encrypt_file(sys.argv[2], sys.argv[3])
+    if choice == "-k":
+        New(sys.argv[2])
+    
+    elif choice == "-e":
+        if len(sys.argv) < 3:
+            print("Not enough arguments.")
+            sys.exit()
+        encrypt_file(sys.argv[2], sys.argv[3])
 
-        elif choice == "-d":
-            decrypt_file(sys.argv[2], sys.argv[3])
-        
-        else:
-            print(f"error at {sys.argv[0]}, no option {sys.argv[1]}")
+    elif choice == "-d":
+        if len(sys.argv) < 3:
+            print("Not enough arguments.")
+            sys.exit()
+        decrypt_file(sys.argv[2], sys.argv[3])
+    
+    else:
+        print(f"error at {sys.argv[0]}, no option {sys.argv[1]}")
 if __name__ == "__main__":
     main()
