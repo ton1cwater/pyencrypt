@@ -15,7 +15,8 @@ Flags:
 ## Install
 Make sure you have Python ```>=v3.11``` and ```pipx``` installed.
 Installing [pipx](https://pipx.pypa.io/stable/#install-pipx) is highly recommended.
-If you have pipx, run ```pipx install git+https://github.com/ton1cwater/pyencrypt/```
+If you have pipx, run ```pipx install git+https://github.com/ton1cwater/pyencrypt/``` then ```pipx inject pyencrypt cryptography```
+
 Now you can type ```pyencrypt``` in the terminal to run.
 
 ### Without pipx:
