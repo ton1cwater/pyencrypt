@@ -63,16 +63,16 @@ def main():
         New(sys.argv[2])
     
     elif choice == "-e":
-        if len(sys.argv) < 3:
+        try:
+            encrypt_file(sys.argv[2], sys.argv[3])
+        except IndexError:
             print("Not enough arguments.")
-            sys.exit()
-        encrypt_file(sys.argv[2], sys.argv[3])
 
     elif choice == "-d":
-        if len(sys.argv) < 3:
+        try:
+            decrypt_file(sys.argv[2], sys.argv[3])
+        except IndexError:
             print("Not enough arguments.")
-            sys.exit()
-        decrypt_file(sys.argv[2], sys.argv[3])
     
     else:
         print(f"error at {sys.argv[0]}, no option {sys.argv[1]}")
